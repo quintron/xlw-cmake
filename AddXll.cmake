@@ -3,15 +3,14 @@ message(STATUS "XLW_PATH=${XLW_PATH}")
 
 macro(add_xll xllname api_file_name)
     message(STATUS "Add Xll: ${xllname}")
-	
     message(STATUS "create wrapper xlw${api_file_name}.cpp")
-    file(WRITE xlw${api_file_name}.cpp)
+    file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/xlw${api_file_name}.cpp)
 
     set(file_list "${ARGN}")
     list(APPEND file_list
-	 ${api_file_name}.h
-         ${api_file_name}.cpp
-         xlw${api_file_name}.cpp
+	 ${CMAKE_CURRENT_SOURCE_DIR}/${api_file_name}.h
+     ${CMAKE_CURRENT_SOURCE_DIR}/${api_file_name}.cpp
+     ${CMAKE_CURRENT_SOURCE_DIR}/xlw${api_file_name}.cpp
     )
 	
     add_library(${xllname} SHARED ${file_list})
